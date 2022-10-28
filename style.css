@@ -8,6 +8,11 @@ body {
   flex-direction: column;
   font-family: "Jura", sans-serif;
   --font-size-multiplier: 1;
+  --minFontSize: 14px;
+  --maxFontSize: 24px;
+  --scaler: 10vw;
+
+  font-size: 16px;
   color: #fff;
   text-transform: uppercase;
 }
@@ -18,10 +23,15 @@ h3,
 h4,
 h5,
 h6 {
-  font-size: clamp(
-    100%,
+  /* font-size: clamp(
+    var(--font-size-multiplier) * 0.5rem,
     calc((var(--font-size-multiplier) * 2rem) + 2vw),
-    var(--font-size-multiplier) * 1rem
+    16px
+  ); */
+  font-size: clamp(
+    var(--minFontSize),
+    var(--scaler),
+    calc(var(--font-size-multiplier) * var(--maxFontSize))
   );
 }
 
@@ -69,6 +79,10 @@ canvas {
   position: relative;
 }
 
+.btn > * {
+  color: #fff;
+}
+
 .btn:hover::after {
   opacity: 1;
 }
@@ -83,6 +97,10 @@ canvas {
   right: 0;
   bottom: 0;
   position: absolute;
+}
+
+section {
+  padding: 0 2em;
 }
 
 section article {
