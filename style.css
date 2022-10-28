@@ -6,16 +6,100 @@ body {
   align-items: center;
   background-color: #0b1e17;
   flex-direction: column;
+  font-family: "Jura", sans-serif;
+  --font-size-multiplier: 1;
+  color: #fff;
+  text-transform: uppercase;
 }
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: clamp(
+    100%,
+    calc((var(--font-size-multiplier) * 2rem) + 2vw),
+    var(--font-size-multiplier) * 1rem
+  );
+}
+
+h1 {
+  --font-size-multiplier: 3;
+  margin: 0.5em 0;
+}
+
+h2 {
+  --font-size-multiplier: 2;
+}
+
+h3 {
+  --font-size-multiplier: 1.75;
+}
+
+h4 {
+  --font-size-multiplier: 1.5;
+}
+
+a {
+  color: #e30724;
+  text-decoration: none;
+}
+
 canvas {
   width: 100vw;
   height: 100vh;
   display: block;
 }
+
+.logo {
+  width: 50vw;
+  fill: #e30724;
+  padding-top: 1em;
+}
+
+.btn {
+  background-color: #e30724;
+  padding: 1.2em 1em;
+  color: #fff;
+  text-decoration: none;
+  margin: 0;
+  box-shadow: 0 15px 15px transparent;
+  position: relative;
+}
+
+.btn:hover::after {
+  opacity: 1;
+}
+
+.btn::after {
+  box-shadow: 0 0px 15px #e30724;
+  opacity: 0;
+  transition: opacity 0.123s ease;
+  content: "";
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: absolute;
+}
+
+section article {
+  text-align: center;
+}
+
+section article h1 {
+  letter-spacing: 0.33rem;
+  font-weight: 400;
+}
+
 .spotify-canvas {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+  gap: 1em 0;
 }
 
 .spotify-canvas canvas {

@@ -1,80 +1,102 @@
 <head>
-    <title>Red Encryption</title>
-    <link rel="stylesheet" href="style.css">
+  <title>Red Encryption</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Jura&display=swap"
+    rel="stylesheet"
+  />
 </head>
 <body>
-    <div class="spotify-canvas">
-      <canvas id="canvas"></canvas>
-    </div>
-<script id="vs" type="f">
-  attribute vec2 position;
-  attribute vec2 texcoord;
+  <div class="spotify-canvas">
+    <img class="logo" src="img/logo.svg" alt="Exayer logo" />
+    <section>
+      <article>
+        <h1>Red Encryption</h1>
+        <h2>
+          <a
+            href="//open.spotify.com/artist/0B8N4yl1oFZCzM451RlQf4?si=vyPlCncfTfqJa1tgcbR4Ew"
+            >Exayer</a
+          >
+          x
+          <a
+            href="//open.spotify.com/artist/3u76gFCCBttGZqqEimHsyL?si=NGBEX6KLQQSVGr6aSi-86Q"
+            >Dark Trials Explorer</a
+          >
+        </h2>
+        <a class="btn" href="#">OUT NOVEMBER 4</a>
+      </article>
+    </section>
+    <canvas id="canvas"></canvas>
+  </div>
+  <script id="vs" type="f">
+    attribute vec2 position;
+    attribute vec2 texcoord;
 
-  uniform mat3 u_matrix;
+    uniform mat3 u_matrix;
 
-  varying vec2 v_texcoord;
+    varying vec2 v_texcoord;
 
-  void main() {
-     gl_Position = vec4(u_matrix * vec3(position, 1), 1);
-     v_texcoord = texcoord;
-  }
-</script>
-<script id="fs" type="f">
-  precision mediump float;
-  
-  uniform vec2 u_mouse;
-  uniform vec2 u_res;
-  uniform float u_time;
-  uniform float u_dpi;
-  uniform sampler2D u_text;
-  uniform sampler2D u_map;
-  uniform sampler2D u_blur;
+    void main() {
+       gl_Position = vec4(u_matrix * vec3(position, 1), 1);
+       v_texcoord = texcoord;
+    }
+  </script>
+  <script id="fs" type="f">
+    precision mediump float;
 
-  varying vec2 v_texcoord;
-   
-  void main(){
-    float distAmount = .003;
-      
-    vec2 uv = v_texcoord; 
-    vec2 parallax = u_mouse * 0.05;
-    
-    float freq = 70.0;
-    float amp = 0.004;
-    
-    vec4 map = texture2D(u_map, uv);
+    uniform vec2 u_mouse;
+    uniform vec2 u_res;
+    uniform float u_time;
+    uniform float u_dpi;
+    uniform sampler2D u_text;
+    uniform sampler2D u_map;
+    uniform sampler2D u_blur;
 
-    float dethMap = map.r - .5;
-    float distMap = map.g;
+    varying vec2 v_texcoord;
 
-    float x = uv.y * freq + u_time * 3.; 
-    float y = uv.x * freq + u_time * .3;
-    
-    float distX = cos(x+y) * amp * cos(y);
-    float distY = sin(x-y) * amp * cos(y);
+    void main(){
+      float distAmount = .003;
 
-    vec2 distPosition = uv + vec2(distX, distY) * distMap;
-       
-    vec2 turbulance = distPosition + (parallax * dethMap);
-    
-    vec4 ori_img = texture2D(u_text, turbulance);
-    vec4 blur_img = texture2D(u_blur, turbulance);
-        
-    vec4 color = mix(ori_img, blur_img, length(distPosition) * distAmount);
-    
-    gl_FragColor = color;
-  }  
-</script>
+      vec2 uv = v_texcoord;
+      vec2 parallax = u_mouse * 0.05;
 
-<script>
+      float freq = 70.0;
+      float amp = 0.004;
 
-const toggleSpotifyCanvas = () => {
-  const bodySelector = document.querySelector('div');
-  bodySelector.classList.toggle('spotify-canvas');
-}
+      vec4 map = texture2D(u_map, uv);
 
-</script>
-<button onclick="toggleSpotifyCanvas()">Canvas</button>
-<script src="https://cdn.rawgit.com/greggman/twgl.js/master/dist/4.x/twgl-full.min.js"></script>
-<script src="https://webglfundamentals.org/webgl/resources/m3.js"></script>
-<script src="main.js"></script>
+      float dethMap = map.r - .5;
+      float distMap = map.g;
+
+      float x = uv.y * freq + u_time * 3.;
+      float y = uv.x * freq + u_time * .3;
+
+      float distX = cos(x+y) * amp * cos(y);
+      float distY = sin(x-y) * amp * cos(y);
+
+      vec2 distPosition = uv + vec2(distX, distY) * distMap;
+
+      vec2 turbulance = distPosition + (parallax * dethMap);
+
+      vec4 ori_img = texture2D(u_text, turbulance);
+      vec4 blur_img = texture2D(u_blur, turbulance);
+
+      vec4 color = mix(ori_img, blur_img, length(distPosition) * distAmount);
+
+      gl_FragColor = color;
+    }
+  </script>
+
+  <script>
+    const toggleSpotifyCanvas = () => {
+      const bodySelector = document.querySelector("div");
+      bodySelector.classList.toggle("spotify-canvas");
+    };
+  </script>
+  <button onclick="toggleSpotifyCanvas()">Canvas</button>
+  <script src="https://cdn.rawgit.com/greggman/twgl.js/master/dist/4.x/twgl-full.min.js"></script>
+  <script src="https://webglfundamentals.org/webgl/resources/m3.js"></script>
+  <script src="main.js"></script>
 </body>
