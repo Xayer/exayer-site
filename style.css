@@ -1,16 +1,29 @@
-body { margin: 0; display: flex; justify-content: start; height: 100vh; width: 100vw; align-items: center; background-color: #0b1e17; flex-direction: column; }
-canvas { width: 100vw; height: 100vh; display: block; }
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  background-color: #0b1e17;
+  flex-direction: column;
+}
+canvas {
+  width: 100vw;
+  height: 100vh;
+  display: block;
+}
 .spotify-canvas {
-    height: 1200px;
-    width: 675px;
-    display: flex; justify-content: center; align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .spotify-canvas canvas {
-    height: clamp(200px, 1200px, 90vh);
-    width: 100vw;
+  height: auto !important;
+  width: 90vw;
+  aspect-ratio: 6 / 12;
 }
 
 button {
-    display: none;
+  display: none;
 }
