@@ -3,7 +3,9 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <canvas id="canvas"></canvas>
+    <div class="spotify-canvas">
+      <canvas id="canvas"></canvas>
+    </div>
 <script id="vs" type="f">
   attribute vec2 position;
   attribute vec2 texcoord;
@@ -62,6 +64,16 @@
     gl_FragColor = color;
   }  
 </script>
+
+<script>
+
+const toggleSpotifyCanvas = () => {
+  const bodySelector = document.querySelector('div');
+  bodySelector.classList.toggle('spotify-canvas');
+}
+
+</script>
+<button onclick="toggleSpotifyCanvas()">Canvas</button>
 <script src="https://cdn.rawgit.com/greggman/twgl.js/master/dist/4.x/twgl-full.min.js"></script>
 <script src="https://webglfundamentals.org/webgl/resources/m3.js"></script>
 <script src="main.js"></script>
