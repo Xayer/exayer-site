@@ -55,20 +55,50 @@ a {
   text-decoration: none;
 }
 
+.title {
+  /* GODSPEED */
+
+  font-family: "Jura";
+  font-style: normal;
+  font-weight: 400;
+  text-align: center;
+  letter-spacing: 0.5rem;
+
+  color: #ffffff;
+
+  --blur: 0.5714%; /* 57.14% */
+  --distance: 0.057%; /* 5.7% */
+  --calculated-blur: calc(var(--blur) * (var(--font-size-multiplier) * 1rem));
+  --calculated-distance: calc(
+    var(--distance) * (var(--font-size-multiplier) * 1rem)
+  );
+
+  text-shadow: 0px 0px var(--calculated-blur) rgba(255, 255, 255, 0.5),
+    var(--calculated-distance) 0px var(--calculated-distance) #46c7ff,
+    calc(var(--calculated-distance) * -1) 0px var(--calculated-distance) #ff4d64,
+    0px 0px var(--calculated-blur) #ffffff;
+
+  /* Inside auto layout */
+  flex: none;
+  order: 2;
+  flex-grow: 0;
+}
+
 canvas {
   width: 100vw;
   height: 100vh;
   display: block;
+  aspect-ratio: 1 / 1;
 }
 
 .logo {
-  width: 50vw;
-  fill: #e30724;
+  width: 75vw;
+  fill: #ff003d;
   padding-top: 1em;
 }
 
 .btn {
-  background-color: #e30724;
+  background-color: #ff003d;
   padding: 1.2em 1em;
   color: #fff;
   text-decoration: none;
@@ -110,7 +140,7 @@ section article h1 {
   font-weight: 400;
 }
 
-.spotify-canvas {
+div {
   display: flex;
   justify-content: center;
   align-items: center;
