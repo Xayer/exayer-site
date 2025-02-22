@@ -1,18 +1,28 @@
-body {
+@import url("https://fonts.googleapis.com/css2?family=Jura:wght@300..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+
+:root {
+  --background: #111;
+  --background-alt: #222;
+  --text-color: #ddd;
+  --spacing: 16px;
+  --logo: #999;
+  --radius: calc(var(--spacing) / 2);
+  --spotify: #1db954;
+  --apple-music: #fc3c44;
+  --tidal: #fff;
+  --youtube: #ff0000;
+  --instagram: #c13584;
+}
+
+body,
+html {
+  background-color: var(--background);
   margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: start;
-  align-items: center;
-  background-color: #0b1e17;
-  flex-direction: column;
-  font-family: "Jura", sans-serif;
-  --font-size-multiplier: 1;
-  --minFontSize: 1rem;
-  --maxFontSize: 1.2rem;
-  --scaler: 10vw;
-  color: #fff;
-  text-transform: uppercase;
+  color: var(--text-color);
+  font-family: Jura, sans-serif;
+  overflow-x: hidden;
+  scrollbar-color: var(--background-alt) var(--background);
+  scrollbar-width: thin;
 }
 
 h1,
@@ -21,139 +31,124 @@ h3,
 h4,
 h5,
 h6 {
-  /* font-size: clamp(
-    var(--font-size-multiplier) * 0.5rem,
-    calc((var(--font-size-multiplier) * 2rem) + 2vw),
-    16px
-  ); */
-  font-size: clamp(
-    var(--minFontSize),
-    var(--scaler),
-    calc(var(--font-size-multiplier) * var(--maxFontSize))
-  );
-}
-
-h1 {
-  --font-size-multiplier: 3;
-  margin: 0.5em 0;
-}
-
-h2 {
-  --font-size-multiplier: 2;
-}
-
-h3 {
-  --font-size-multiplier: 1.75;
-}
-
-h4 {
-  --font-size-multiplier: 1.5;
-}
-
-a {
-  color: #e30724;
-  text-decoration: none;
-}
-
-.title {
-  /* GODSPEED */
-
-  font-family: "Jura";
-  font-style: normal;
-  font-weight: 400;
+  text-transform: uppercase;
+  font-weight: 300;
   text-align: center;
-  letter-spacing: 0.5rem;
-
-  color: #ffffff;
-
-  --blur: 0.5714%; /* 57.14% */
-  --distance: 0.057%; /* 5.7% */
-  --calculated-blur: calc(var(--blur) * (var(--font-size-multiplier) * 1rem));
-  --calculated-distance: calc(
-    var(--distance) * (var(--font-size-multiplier) * 1rem)
-  );
-
-  text-shadow: 0px 0px var(--calculated-blur) rgba(255, 255, 255, 0.5),
-    var(--calculated-distance) 0px var(--calculated-distance) #46c7ff,
-    calc(var(--calculated-distance) * -1) 0px var(--calculated-distance) #ff4d64,
-    0px 0px var(--calculated-blur) #ffffff;
-
-  /* Inside auto layout */
-  flex: none;
-  order: 2;
-  flex-grow: 0;
-}
-
-canvas {
-  width: 100vw;
-  height: 100vh;
-  display: block;
-  aspect-ratio: 1 / 1;
-}
-
-.logo {
-  width: 75vw;
-  fill: #ff003d;
-  padding-top: 1em;
-}
-
-.btn {
-  background-color: #ff003d;
-  padding: 1.2em 1em;
-  color: #fff;
-  text-decoration: none;
   margin: 0;
-  box-shadow: 0 15px 15px transparent;
-  position: relative;
 }
 
-.btn a {
-  color: #fff;
+header {
+  padding: var(--spacing);
+  display: flex;
+  justify-content: center;
 }
 
-.btn:hover::after {
-  opacity: 1;
+header svg {
+  width: 100%;
+  max-width: 512px;
 }
 
-.btn::after {
-  box-shadow: 0 0px 15px #e30724;
-  opacity: 0;
-  transition: opacity 0.123s ease;
-  content: "";
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  position: absolute;
+header svg path {
+  color: var(--logo);
+  stroke-color: currentColor !important;
 }
 
 section {
-  padding: 0 2em;
+  display: flex;
+  gap: var(--spacing);
+  margin: var(--spacing) 0 0;
+  scroll-snap-type: x proximity;
+  -webkit-overflow-scrolling: touch;
+  overflow-x: scroll;
+  padding: var(--spacing);
 }
 
 section article {
-  text-align: center;
+  min-width: 70vw;
+  scroll-snap-align: center;
+  display: flex;
+  gap: var(--spacing);
+  flex-direction: column;
+  background-color: var(--background-alt);
+  border-radius: var(--radius);
+  padding-bottom: calc(var(--spacing) * 2);
 }
 
-section article h1 {
-  letter-spacing: 0.33rem;
-  font-weight: 400;
+@media screen and (min-width: 720px) {
+  section article {
+    min-width: 640px !important;
+  }
 }
 
-div {
+section article img {
+  width: 100%;
+  border-radius: var(--radius);
+  aspect-ratio: 1;
+  overflow: hidden;
+  border: 1px solid var(--logo);
+  box-sizing: border-box;
+  box-shadow: 0px 0px 2px var(--logo);
+}
+
+footer {
+  margin-top: var(--spacing);
+  padding: var(--spacing);
+}
+
+nav {
   display: flex;
   justify-content: center;
-  align-items: center;
+  gap: var(--spacing);
   flex-direction: column;
-  gap: 1em 0;
+  align-items: center;
 }
 
-.spotify-canvas canvas {
-  height: auto !important;
-  width: 90vw;
-  aspect-ratio: 6 / 12;
+@media screen and (min-width: 720px) {
+  nav {
+    flex-direction: row;
+    gap: calc(var(--spacing) * 2);
+  }
 }
 
-button {
-  display: none;
+a {
+  --color: var(--logo);
+  text-decoration: none;
+  position: relative;
+  font-weight: 700;
+  color: var(--text-color);
+}
+
+a:before {
+  content: "";
+  width: 0;
+  position: absolute;
+  bottom: 0px;
+  left: 0;
+  height: 1px;
+  background-color: var(--color);
+  transition: all 0.25s;
+}
+
+a:hover:before {
+  width: 100%;
+}
+
+a[href*="spotify"] {
+  --color: var(--spotify);
+}
+
+a[href*="youtube"] {
+  --color: var(--youtube);
+}
+
+a[href*="apple"] {
+  --color: var(--apple-music);
+}
+
+a[href*="tidal"] {
+  --color: var(--tidal);
+}
+
+a[href*="instagram"] {
+  --color: var(--instagram);
 }

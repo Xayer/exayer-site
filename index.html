@@ -10,87 +10,115 @@
   />
 </head>
 <body>
-  <div>
-    <a href="https://open.spotify.com/artist/0B8N4yl1oFZCzM451RlQf4?si=vyPlCncfTfqJa1tgcbR4Ew" target="_blank"><img class="logo" src="img/logo outline.svg" alt="Exayer logo" /></a>
-    <section>
-      <article>
-        <h1 class="title">Godspeed</h1>
-          <a class="btn"
-            href="https://open.spotify.com/track/5tvgSnBBRhzfzWXF8eMCqp?si=da40b9dec3db4465"
-            target="_blank"
-            >Listen on Spotify</a>
-        </h6>
-      </article>
-    </section>
-    <canvas id="canvas"></canvas>
-  </div>
-  <script id="vs" type="f">
-    attribute vec2 position;
-    attribute vec2 texcoord;
-
-    uniform mat3 u_matrix;
-
-    varying vec2 v_texcoord;
-
-    void main() {
-       gl_Position = vec4(u_matrix * vec3(position, 1), 1);
-       v_texcoord = texcoord;
-    }
-  </script>
-  <script id="fs" type="f">
-    precision mediump float;
-
-    uniform vec2 u_mouse;
-    uniform vec2 u_res;
-    uniform float u_time;
-    uniform float u_dpi;
-    uniform sampler2D u_text;
-    uniform sampler2D u_map;
-    uniform sampler2D u_blur;
-
-    varying vec2 v_texcoord;
-
-    void main(){
-      float distAmount = .003;
-
-      vec2 uv = v_texcoord;
-      vec2 parallax = u_mouse * 0.05;
-
-      float freq = 70.0;
-      float amp = 0.004;
-
-      vec4 map = texture2D(u_map, uv);
-
-      float dethMap = map.r - .5;
-      float distMap = map.g;
-
-      float x = uv.y * freq + u_time * 3.;
-      float y = uv.x * freq + u_time * .3;
-
-      float distX = cos(x+y) * amp * cos(y);
-      float distY = sin(x-y) * amp * cos(y);
-
-      vec2 distPosition = uv + vec2(distX, distY) * distMap;
-
-      vec2 turbulance = distPosition + (parallax * dethMap);
-
-      vec4 ori_img = texture2D(u_text, turbulance);
-      vec4 blur_img = texture2D(u_blur, turbulance);
-
-      vec4 color = mix(ori_img, blur_img, length(distPosition) * distAmount);
-
-      gl_FragColor = color;
-    }
-  </script>
-
-  <script>
-    const toggleSpotifyCanvas = () => {
-      const bodySelector = document.querySelector("div");
-      bodySelector.classList.toggle("spotify-canvas");
-    };
-  </script>
-  <button onclick="toggleSpotifyCanvas()">Canvas</button>
-  <script src="https://cdn.rawgit.com/greggman/twgl.js/master/dist/4.x/twgl-full.min.js"></script>
-  <script src="https://webglfundamentals.org/webgl/resources/m3.js"></script>
-  <script src="main-godspeed.js"></script>
+  <header>
+    <h1>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 2497 359"
+      >
+        <title>Exayer</title>
+        <path
+          stroke="currentColor"
+          stroke-width="13"
+          d="M10 242.9v33.7L83.998 344H158l74-67.4H84.001L10 209.2v33.7Z"
+        />
+        <path
+          stroke="currentColor"
+          stroke-width="13"
+          d="m10 74.4 74 67.4h222l37 33.7-37 33.7H84v33.7l-74-67.4V74.4Z"
+        />
+        <path
+          stroke="currentColor"
+          stroke-width="13"
+          d="M121.001 74.4h111.008l-74-67.4H47L10 40.7l18.5 16.85L47 74.4l37 33.7V74.4h37.001ZM712.231 344H823L675.308 209.2h-36.923l-73.847 67.4h73.847l73.846 67.4Zm-258.462 0H343l147.692-134.8 110.719-.001L453.769 344Zm0-337H343l147.692 134.8h36.923l73.847-67.4h-73.847L453.769 7Zm258.462 0H823L675.308 141.8l-110.719.001L712.231 7ZM971 7 823 141.801v67.4l74 67.399v-67.399h37l74-67.4h-74l74-67.403 37 33.701 37 33.702h-37l-74 67.4h148V344l74-67.4V141.801L1045 7h-74Zm333 0h-111l111 101.1 37 33.7h37l74-67.4h-74L1304 7Zm277.5 0h92.5l-222 202.2V344h-92.5V209.2L1581.5 7Zm202.92 202.2H1970l74-67.4h-296l-37 33.7 17.92 16.85 55.5 50.55v-33.7Z"
+        />
+        <path
+          stroke="currentColor"
+          stroke-width="13"
+          d="M1748 276.6h222l74 67.4h-296l-37-33.7-37-33.7v-67.4l74 67.4ZM1896 7l-111 101.1-9.25 8.425h73.41L1896 74.4h111L1933 7h-37Zm409.5 202.2-73.8-67.4-9.22 8.425-9.23 8.425-18.45 16.85-36.9 33.7v67.4l73.8 67.4V242.9l36.9-33.7h36.9ZM2194.8 74.4 2121 7h221.4l110.7 101.1-73.8 67.4L2490 276.6l-.14 67.268.14.132-147.6-134.8-73.8-67.4h36.9l36.9-33.7-36.9-33.7h-110.7Z"
+        />
+      </svg>
+    </h1>
+  </header>
+  <h2>Discography</h2>
+  <section>
+    <article>
+      <img
+        src="https://i.scdn.co/image/ab67616d0000b27347343f6486db7f79972712f0"
+        alt="The Unknown by Exayer"
+      />
+      <h3>The Unknown</h3>
+      <nav>
+        <a
+          href="https://open.spotify.com/track/6wm83xlmMXNeBCgZL2eTHt?si=b9cd44d1ccee4fa7"
+          >Spotify</a
+        >
+        <a
+          href="https://music.apple.com/dk/album/the-unknown/1768652169?i=1768652171"
+          >Apple Music</a
+        >
+        <a href="https://listen.tidal.com/album/387543875/track/387543876"
+          >Tidal</a
+        >
+        <a href="https://music.youtube.com/watch?v=3SGWkFZ--eo"
+          >YouTube Music</a
+        >
+      </nav>
+    </article>
+    <article>
+      <img
+        src="https://i.scdn.co/image/ab67616d0000b273d354b3a0f9d0b4ff2feca070"
+        alt="Godspeed by Exayer"
+      />
+      <h3>Godspeed</h3>
+      <nav>
+        <a
+          href="https://open.spotify.com/track/6iuFMCV4VK1WjN3WMs45L7?si=250ee1ee094f4e2f"
+          >Spotify</a
+        >
+        <a
+          href="https://music.apple.com/us/album/godspeed/1735716732?i=1735717008"
+          >Apple Music</a
+        >
+        <a href="https://tidal.com/browse/album/350781631?u">Tidal</a>
+        <a
+          href="https://music.youtube.com/watch?v=XXY6PpEu794&si=WhTFsf-yjE_CeEeL"
+          >YouTube Music</a
+        >
+      </nav>
+    </article>
+    <article>
+      <img
+        src="https://i.scdn.co/image/ab67616d0000b2737ffa7e33aaf2513d9d19227d"
+        alt="Red Encryption by Dark Trials Explorer & Exayer"
+      />
+      <h3>Red Encryption</h3>
+      <nav>
+        <a
+          href="https://open.spotify.com/album/2zVPwazhntQEtNi7UmS6bs?si=QWqScZ4jR1W8p2IPiW4TYw"
+          >Spotify</a
+        >
+        <a
+          href="https://music.apple.com/us/album/red-encryption/1651304002?i=1651304023"
+          >Apple Music</a
+        >
+        <a href="https://tidal.com/browse/album/257164917?u">Tidal</a>
+        <a
+          href="https://music.youtube.com/watch?v=FUhiH1YZf_0&si=6dF1yx_AxW3o6q67"
+          >YouTube Music</a
+        >
+      </nav>
+    </article>
+  </section>
+  <h2>Follow</h2>
+  <footer>
+    <nav>
+      <!--       <a href="https://open.spotify.com/artist/0B8N4yl1oFZCzM451RlQf4?si=DbuLgSTCQ8eP895plL74Qg">Spotify</a>
+    <a href="https://music.apple.com/artist/exayer/1648271895">Apple Music</a>
+    <a href="https://listen.tidal.com/artist/35273850">Tidal</a>
+    <a href="https://music.youtube.com/channel/UCaSnWASBsUOrEg6xy0bqzjw">YouTube Music</a> -->
+      <a href="https://www.instagram.com/exayer_music/">Instagram</a>
+    </nav>
+  </footer>
 </body>
