@@ -12,6 +12,7 @@
   --tidal: #fff;
   --youtube: #ff0000;
   --instagram: #c13584;
+  --cover-size: 640px;
 }
 
 body,
@@ -63,6 +64,13 @@ section {
   padding: var(--spacing);
 }
 
+@media screen and (min-width: 1980px) {
+  section {
+    align-items: center;
+    justify-content: center;
+  }
+}
+
 section article {
   min-width: 70vw;
   scroll-snap-align: center;
@@ -76,7 +84,7 @@ section article {
 
 @media screen and (min-width: 720px) {
   section article {
-    min-width: 640px !important;
+    min-width: var(--cover-size) !important;
   }
 }
 
